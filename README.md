@@ -6,26 +6,14 @@ enjoy=)
 TO DO:
 TESTS,DOCKER, Search users by name and books by title
 
-функционал:
-1) Страницы добавления, изменения и удаления человека.
-2) Страницы добавления, изменения и удаления книги
-3) Страница со списком всех людей (люди кликабельные - при клике осуществляется
-переход на страницу человека).
-4) Страница со списком всех книг (книги кликабельные - при клике осуществляется
-переход на страницу книги).
-5) Страница человека, на которой показаны значения его полей и список книг, которые он
-взял. Если человек не взял ни одной книги, вместо списка будет  текст "нет книги".
-6) Страница книги, на которой показаны значения полей этой книги и имя человека,
-который взял эту книгу. Если эта книга не была никем взята, появляется текст "Эта
-книга свободна".
-7) На странице книги, если книга взята человеком, рядом с его именем есть кнопка
-"Освободить книгу". Эта кнопка нажимается библиотекарем тогда, когда читатель
-возвращает эту книгу обратно в библиотеку. После нажатия на эту кнопку книга снова
-становится свободно и пропадает из списка книг человека.
-8) На странице книги, если книга свободна, есть выпадающий список 
-со всеми людьми и кнопка "Назначить книгу". Эта кнопка нажимается библиотекарем
-тогда, когда читатель хочет забрать эту книгу домой. После нажатия на эту кнопку, книга
- принадлежать выбранному человеку и  появится в его списке
-книг.
-9) Все поля  валидируюся - с помощью @Valid и Spring Validator, если это
-требуется.
+functional:
+
+1)Pages for adding, changing and deleting a person.
+2)Pages for adding, editing, and deleting a book
+3)A page with attractive to all people (people are clickable - when clicked, a transition to the person's page took place).
+4)A page with a complex book (books are clickable - when clicked, a transition to the page of the book occurred).
+5)A person's page showing their field values ​​and the list of books they have taken. If the person hasn't picked up any books, the list will instead read "no book".
+6)A page of a book showing the values ​​of the margins of that book and the name of the person who borrowed that book. If this book has not been taken by anyone, the lyrics are "This book is free."
+7)On the book page, if the book is taken from a person, there is a "Release Book" button next to their name. This button presses the library when the reader returns this book in exchange. After approaching this point, the book becomes free again and is sold from the person's book list.
+8)On the book page, if the book is free, there is a drop-down list with all people and a button "Assign book". This button presses the library when the reader wants to take this book home. Once the correct setting is selected, the guard book will be selected in its list of books.
+9_All fields are validated - with @Valid and Spring Validator if required.
