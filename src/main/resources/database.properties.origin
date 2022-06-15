@@ -1,4 +1,4 @@
 driver=
-url=
-user=
-password=
+url=jdbc:postgresql://localhost:5432/project_library
+user=postgres
+password=postgres
