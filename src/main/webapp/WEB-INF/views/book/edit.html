@@ -5,6 +5,7 @@
     <title>Редактирование книги в базе данных</title>
 </head>
 <body>
+
 <form th:method="PATCH" th:action="@{/books/edit/{id}(id=${book.getId()})}" th:object="${book}">
     <label for="title"> Введите название книги</label>
     <input th:type="text" th:field="*{title}" id="title"/>
@@ -21,7 +22,6 @@
     <hr/>
     <input th:type="submit" value="Редактировать"/>
 </form>
-
 
 </body>
 </html>
