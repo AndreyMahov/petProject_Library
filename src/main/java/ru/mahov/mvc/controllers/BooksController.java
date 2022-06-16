@@ -1,4 +1,4 @@
-package ru.mahov.mvc.conrollers;
+package ru.mahov.mvc.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
