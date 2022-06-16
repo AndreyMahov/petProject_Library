@@ -28,8 +28,7 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO person(fullname,yearOfBirth) VALUES (?,?)"
-                , person.getFullName(), person.getYearOfBirth());
+        jdbcTemplate.update("INSERT INTO person(fullname,yearOfBirth) VALUES (?,?)", person.getFullName(), person.getYearOfBirth());
     }
 
     public void delete(int id) {
@@ -37,14 +36,12 @@ public class PersonDAO {
     }
 
     public Person showById(int id) {
-        return jdbcTemplate.query("SELECT *FROM person WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
-                .stream().findAny().orElse(null);
+        return jdbcTemplate.query("SELECT *FROM person WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
 
     }
 
     public void update(int id, Person updatePerson) {
-        jdbcTemplate.update("UPDATE person set fullname=?,yearOfBirth=? WHERE id=?",
-                updatePerson.getFullName(), updatePerson.getYearOfBirth(), id);
+        jdbcTemplate.update("UPDATE person set fullname=?,yearOfBirth=? WHERE id=?", updatePerson.getFullName(), updatePerson.getYearOfBirth(), id);
     }
 
     public List<Book> showBooks(int id) {

@@ -28,13 +28,11 @@ public class BooksDAO {
     }
 
     public Book show(int id) {
-        return jdbcTemplate.query("SELECT * FROM book WHERE id = ?",
-                new Object[]{id}, bookRowMapper).stream().findAny().orElse(null);
+        return jdbcTemplate.query("SELECT * FROM book WHERE id = ?", new Object[]{id}, bookRowMapper).stream().findAny().orElse(null);
     }
 
     public void update(int id, Book book) {
-        jdbcTemplate.update("UPDATE book SET title=?, author=?, year=? WHERE id=?"
-                , book.getTitle(), book.getAuthor(), book.getYear(), id);
+        jdbcTemplate.update("UPDATE book SET title=?, author=?, year=? WHERE id=?", book.getTitle(), book.getAuthor(), book.getYear(), id);
     }
 
     public void delete(int id) {
@@ -42,8 +40,7 @@ public class BooksDAO {
     }
 
     public void add(Book book) {
-        jdbcTemplate.update("INSERT INTO book(title,author,year) VALUES (?,?,?)"
-                , book.getTitle(), book.getAuthor(), book.getYear());
+        jdbcTemplate.update("INSERT INTO book(title,author,year) VALUES (?,?,?)", book.getTitle(), book.getAuthor(), book.getYear());
     }
 
 
@@ -57,9 +54,7 @@ public class BooksDAO {
 
 
     public Optional<Person> getOwner(int id) {
-        return jdbcTemplate.query("SELECT Person.* FROM Book JOIN Person ON Book.person_id = Person.id " +
-                        "WHERE Book.id = ?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
-                .stream().findAny();
+        return jdbcTemplate.query("SELECT Person.* FROM Book JOIN Person ON Book.person_id = Person.id " + "WHERE Book.id = ?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
 
     }
 }
