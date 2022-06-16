@@ -10,6 +10,7 @@ import ru.mahov.mvc.models.Person;
 import java.time.Year;
 
 
+
 @Component
 public class PersonValidator implements Validator {
 
@@ -29,12 +30,11 @@ public class PersonValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Person person = (Person) o;
 
-        if (personDAO.getByName(person.getFullName()).isPresent()) {
-            errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");
-        }
+        if (personDAO.getPersonByName(person.getFullName()).isPresent()){
+            errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");}
 
-        if (person.getYearOfBirth() > (Year.now().getValue() - Person.getMinYear())) {
-            errors.rejectValue("yearOfBirth", "", "Регистрация только с 14 лет");
+        if ( person.getYearOfBirth() > (Year.now().getValue()-Person.getMinYear())){
+            errors.rejectValue("yearOfBirth","","Регистрация только с 14 лет");
         }
 
     }
