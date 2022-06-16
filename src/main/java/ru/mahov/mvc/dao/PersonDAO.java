@@ -31,21 +31,27 @@ public class PersonDAO {
 
     public void save(Person person) {
         jdbcTemplate.update("INSERT INTO person(fullname,yearOfBirth) VALUES (?,?)", person.getFullName(), person.getYearOfBirth());
+
     }
+
 
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
     }
+
 
     public Person show(int id) {
 
         return jdbcTemplate.query("SELECT *FROM person WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
     }
 
+
     public void update(int id, Person updatePerson) {
 
         jdbcTemplate.update("UPDATE person set fullname=?,yearOfBirth=? WHERE id=?", updatePerson.getFullName(), updatePerson.getYearOfBirth(), id);
+
     }
+
 
     public List<Book> showBooks(int id) {
         return jdbcTemplate.query("SELECT*FROM book JOIN person ON person.id = book.person_id WHERE person_id=?", bookRowMapper, id);
