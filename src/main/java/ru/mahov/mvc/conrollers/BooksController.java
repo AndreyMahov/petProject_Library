@@ -26,7 +26,7 @@ public class BooksController {
     }
 
     @GetMapping()
-    public String showAll(Model model) {
+    public String index(Model model) {
         model.addAttribute("books", booksDAO.index());
         return "/book/index";
     }
@@ -53,12 +53,12 @@ public class BooksController {
     }
 
     @GetMapping("/new")
-    public String addBook(@ModelAttribute("book") Book book) {
+    public String add(@ModelAttribute("book") Book book) {
         return "/book/new";
     }
 
     @PostMapping("/new")
-    public String addBookInDB(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
+    public String add(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "/book/new";
 
         booksDAO.add(book);
