@@ -1,10 +1,15 @@
 # first-springMVC-petProject_library
 App for library manager.
-In this app I use Spring framework, TomCat and jdbc Templayet. 
+In this app I use Spring framework, TomCat and JDBC template. 
 Use SQL commands for start from package 'SQL'
 enjoy=)
+
 TO DO:
-TESTS,DOCKER, Search users by name and books by title
+- Unit tests
+- Integration tests
+- Packaging in Docker container
+- CI pipeline with following steps: build -> fmt check -> unit tests -> integration tests -> publish docker image
+- Search users by name and books by title
 
 functional:
 
