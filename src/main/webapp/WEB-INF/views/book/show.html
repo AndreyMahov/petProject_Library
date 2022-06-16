@@ -8,16 +8,15 @@
 <p th:text="${book.getTitle()} + ', ' + ${book.getAuthor()} +', ' + ${book.getYear()}"> Value</p>
 <br/>
 
-<div th:if="${owner}">
-    <form th:method="PATCH" th:action="@{/books/takebook/{id}(id=${book.getId()})}" th:object="${book}">
-        <a th:href="@{/people/{id}(id=${owner.getId()})}"
-                th:text="'Книга у читателя ' + ${owner.getFullName()}"></a>
+<div th:if="${check.isPresent()}">
+    <form  th:method="PATCH"  th:action="@{/books/takebook/{id}(id=${book.getId()})}" th:object="${book}">
+        <p th:text="'Книга у читателя'"></p>
         <input th:type="submit" value="освободить"/>
     </form>
 
 </div>
-<div th:if="${people}">
-    <form th:method="PATCH" th:action="@{/books/givebook/{id}(id=${book.getId()})}" th:object="${book}">
+<div th:if="${!check.isPresent()}">
+    <form  th:method="PATCH"  th:action="@{/books/givebook/{id}(id=${book.getId()})}" th:object="${book}"  >
         <p th:text="'Книга не занята'"></p>
         <label for="person"></label>
         <SELECT th:object="${book}" th:field="*{person_id}" id="person">
