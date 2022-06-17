@@ -1,25 +1,20 @@
 package ru.mahov.mvc.models;
 
 
-
 import javax.validation.constraints.Min;
-
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
-
 public class Person {
-    private static  int minYear = 14;
 
-
-    private  int id;
+    private static final int MIN_YEAR = 14;
+    private int id;
     @Size(max = 100, message = "Максимум 100 символол")
-   @Pattern(regexp = "[А-Я][а-я]+\\s[А-Я][а-я]+\\s[А-Я][а-я]+", message = "ФИО введене в неверном формате.Фамилия,имя и отчество должны начинаться с заглавной буквы и введениы через пробел")
+    @Pattern(regexp = "[А-Я][а-я]+\\s[А-Я][а-я]+\\s[А-Я][а-я]+", message = "ФИО введено в неверном формате.Фамилия,имя и отчество должны начинаться с заглавной буквы и введениы через пробел")
     private String fullName;
-    @Min(value = 1922,message = "поле не может быть меньше чем 1922")
+    @Min(value = 1922, message = "поле не может быть меньше чем 1922")
     private int yearOfBirth;
-
 
     public Person() {
     }
@@ -29,6 +24,10 @@ public class Person {
         this.fullName = fullName;
         this.yearOfBirth = yearOfBirth;
 
+    }
+
+    public static int getMinYear() {
+        return MIN_YEAR;
     }
 
     public String getFullName() {
@@ -54,14 +53,5 @@ public class Person {
     public void setId(int id) {
         this.id = id;
     }
-
-    public static int getMinYear() {
-        return minYear;
-    }
-
-    public static void setMinYear(int minYear) {
-        Person.minYear = minYear;
-    }
-
 
 }
