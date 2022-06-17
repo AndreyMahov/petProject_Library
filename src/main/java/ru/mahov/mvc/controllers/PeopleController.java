@@ -16,6 +16,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
+
     private final PersonDAO personDAO;
     private final PersonValidator personValidator;
 
@@ -67,12 +68,10 @@ public class PeopleController {
         return "redirect:/people/" + id;
     }
 
-
     @DeleteMapping("/{id}")
     public String delete(@ModelAttribute("person") Person person, @PathVariable int id) {
         personDAO.delete(id);
         return "redirect:/people";
     }
-
 
 }

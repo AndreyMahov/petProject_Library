@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Component
 public class PersonDAO {
+
     private final JdbcTemplate jdbcTemplate;
     private final BookRowMapper bookRowMapper;
 
@@ -23,28 +24,23 @@ public class PersonDAO {
         this.bookRowMapper = bookRowMapper;
     }
 
-
     public List<Person> index() {
         return jdbcTemplate.query("SELECT * FROM person", new BeanPropertyRowMapper<>(Person.class));
     }
-
 
     public void save(Person person) {
         jdbcTemplate.update("INSERT INTO person(fullname,yearOfBirth) VALUES (?,?)", person.getFullName(), person.getYearOfBirth());
 
     }
 
-
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
     }
-
 
     public Person show(int id) {
 
         return jdbcTemplate.query("SELECT *FROM person WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
     }
-
 
     public void update(int id, Person updatePerson) {
 
@@ -52,12 +48,10 @@ public class PersonDAO {
 
     }
 
-
     public List<Book> showBooks(int id) {
         return jdbcTemplate.query("SELECT*FROM book JOIN person ON person.id = book.person_id WHERE person_id=?", bookRowMapper, id);
 
     }
-
 
     public Optional<Person> getByName(String fullName) {
         return jdbcTemplate.query("SELECT*FROM person WHERE fullname=?", new BeanPropertyRowMapper<>(Person.class), fullName).stream().findAny();

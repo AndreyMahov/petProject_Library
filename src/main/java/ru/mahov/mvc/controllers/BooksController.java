@@ -16,6 +16,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/books")
 public class BooksController {
+
     private final BooksDAO booksDAO;
     private final PersonDAO personDAO;
 
@@ -30,7 +31,6 @@ public class BooksController {
         model.addAttribute("books", booksDAO.index());
         return "/book/index";
     }
-
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
@@ -72,7 +72,6 @@ public class BooksController {
         model.addAttribute("people", personDAO.index());
         return "/book/show";
     }
-
 
     @PatchMapping("/givebook/{id}")
     public String giveBook(@ModelAttribute("book") Book book, @PathVariable("id") int id) {

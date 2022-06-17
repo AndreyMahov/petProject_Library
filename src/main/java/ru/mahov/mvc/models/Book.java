@@ -8,12 +8,11 @@ public class Book {
 
     private int id;
     private int person_id;
-    @Size(min = 1, max = 100, message = "Название книги должно состаят минимум из одного символа, максимум из 100")
+    @Size(min = 1, max = 100, message = "Название книги должно состоять минимум из одного символа, максимум из 100")
     private String title;
     @Pattern(regexp = "[А-Я][а-я]+\\s[А-Я][а-я]+", message = "ФИО введене в неверном формате.Фамилия,имя должны быть введены с заглавной буквы через пробел")
     private String author;
     private int year;
-
 
     public Book() {
     }
@@ -65,6 +64,5 @@ public class Book {
     public void setPerson_id(int person_id) {
         this.person_id = person_id;
     }
-
 
 }

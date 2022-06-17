@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Component
 public class BooksDAO {
+
     private final JdbcTemplate jdbcTemplate;
     private final BookRowMapper bookRowMapper;
 
@@ -23,11 +24,9 @@ public class BooksDAO {
         this.bookRowMapper = bookRowMapper;
     }
 
-
     public List<Book> index() {
         return jdbcTemplate.query("SELECT * FROM book", bookRowMapper);
     }
-
 
     public Book show(int id) {
         return jdbcTemplate.query("SELECT * FROM book WHERE id = ?", new Object[]{id}, bookRowMapper).stream().findAny().orElse(null);
@@ -38,17 +37,14 @@ public class BooksDAO {
 
     }
 
-
     public void delete(int id) {
         jdbcTemplate.update("DELETE  FROM book WHERE id=?", id);
     }
-
 
     public void add(Book book) {
         jdbcTemplate.update("INSERT INTO book(title,author,year) VALUES (?,?,?)", book.getTitle(), book.getAuthor(), book.getYear());
 
     }
-
 
     public Optional<Book> checkBook(int id) {
         return jdbcTemplate.query("SELECT*FROM person join  book ON person.id=book.person_id WHERE book.id=?", bookRowMapper, id).stream().findAny();
@@ -63,11 +59,8 @@ public class BooksDAO {
         jdbcTemplate.update("UPDATE book set person_id=NULL  WHERE id=? ", id);
     }
 
-
     public Optional<Person> getOwner(int id) {
         return jdbcTemplate.query("SELECT Person.* FROM Book JOIN Person ON Book.person_id = Person.id " + "WHERE Book.id = ?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
-
-
     }
 
 }

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 @Component
 public class BookRowMapper implements RowMapper<Book> {
+
     @Override
     public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
         Book book = new Book();
