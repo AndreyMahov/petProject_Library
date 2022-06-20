@@ -11,7 +11,7 @@ TO DO:
 - CI pipeline with following steps: build -> fmt check -> unit tests -> integration tests -> publish docker image
 - Search users by name and books by title
 
-![Gay guys](https://www.dezeen.com/2018/06/12/daniel-quasar-lgbt-rainbow-flag-inclusive/)
+![Gay guys](https://www.dezeen.com/2018/06/12/daniel-quasar-lgbt-rainbow-flag-inclusive/](https://static.dezeen.com/uploads/2018/06/lgbt-pride-flag-redesign-hero.jpg)
 
 functional:
 
