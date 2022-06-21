@@ -1,24 +1,21 @@
 package ru.mahov.mvc.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import ru.mahov.mvc.dao.PersonDAO;
 import ru.mahov.mvc.models.Person;
+import ru.mahov.mvc.services.PeopleService;
 
 import java.time.Year;
-
+import java.util.Optional;
 
 @Component
 public class PersonValidator implements Validator {
+    private static final int MIN_YEAR = 14;
+    private final PeopleService peopleService;
 
-    private final PersonDAO personDAO;
-
-    @Autowired
-    public PersonValidator(PersonDAO personDAO) {
-        this.personDAO = personDAO;
+    public PersonValidator(PeopleService peopleService) {
+        this.peopleService = peopleService;
     }
 
     @Override
@@ -28,13 +25,15 @@ public class PersonValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        Person person = (Person) o;
+        Person updatePerson = (Person) o;
+        Optional<Person> dbPerson = peopleService.findByFullname(updatePerson.getFullName());
 
-        if (personDAO.getByName(person.getFullName()).isPresent()) {
+        if (dbPerson.isPresent() && updatePerson.getId() != dbPerson.get().getId()) {
             errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");
         }
 
-        if (person.getYearOfBirth() > (Year.now().getValue() - Person.getMinYear())) {
+
+        if (updatePerson.getYearOfBirth() > (Year.now().getValue() - MIN_YEAR)) {
             errors.rejectValue("yearOfBirth", "", "Регистрация только с 14 лет");
         }
 
