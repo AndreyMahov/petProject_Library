@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Component
 public class PersonValidator implements Validator {
-
     private static final int MIN_YEAR = 14;
     private final PeopleService peopleService;
 
