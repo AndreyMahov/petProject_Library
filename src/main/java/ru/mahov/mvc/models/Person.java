@@ -1,57 +1,50 @@
 package ru.mahov.mvc.models;
 
+import lombok.Data;
 
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
+@Entity
+@Table(name = "person")
+public @Data class Person {
 
-public class Person {
-
-    private static final int MIN_YEAR = 14;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "fullname")
     @Size(max = 100, message = "Максимум 100 символол")
     @Pattern(regexp = "[А-Я][а-я]+\\s[А-Я][а-я]+\\s[А-Я][а-я]+", message = "ФИО введено в неверном формате.Фамилия,имя и отчество должны начинаться с заглавной буквы и введениы через пробел")
     private String fullName;
+
+    @Column(name = "yearOfBirth")
     @Min(value = 1922, message = "поле не может быть меньше чем 1922")
     private int yearOfBirth;
+
+    @OneToMany(mappedBy = "owner")
+    List<Book> books;
 
     public Person() {
     }
 
-    public Person(int id, String fullName, int yearOfBirth) {
-        this.id = id;
+    public Person(String fullName, int yearOfBirth) {
         this.fullName = fullName;
         this.yearOfBirth = yearOfBirth;
 
     }
 
-    public static int getMinYear() {
-        return MIN_YEAR;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public int getYearOfBirth() {
-        return yearOfBirth;
-    }
-
-    public void setYearOfBirth(int yearOfBirth) {
-        this.yearOfBirth = yearOfBirth;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", yearOfBirth=" + yearOfBirth +
+                '}';
     }
 
 }
