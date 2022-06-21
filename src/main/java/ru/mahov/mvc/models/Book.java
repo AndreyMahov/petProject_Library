@@ -30,7 +30,6 @@ public @Data class Book {
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person owner;
 
-
     public Book() {
     }
 

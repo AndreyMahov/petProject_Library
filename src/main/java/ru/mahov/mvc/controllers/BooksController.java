@@ -49,7 +49,6 @@ public class BooksController {
         return "/book/show";
     }
 
-
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", booksService.findById(id).get());
@@ -79,7 +78,6 @@ public class BooksController {
 
         return "redirect:/books";
     }
-
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {

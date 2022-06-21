@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Component
 public class PersonValidator implements Validator {
+
     private static final int MIN_YEAR = 14;
     private final PeopleService peopleService;
 
@@ -31,7 +32,6 @@ public class PersonValidator implements Validator {
         if (dbPerson.isPresent() && updatePerson.getId() != dbPerson.get().getId()) {
             errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");
         }
-
 
         if (updatePerson.getYearOfBirth() > (Year.now().getValue() - MIN_YEAR)) {
             errors.rejectValue("yearOfBirth", "", "Регистрация только с 14 лет");
