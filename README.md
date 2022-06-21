@@ -1,7 +1,7 @@
 # petProject_library
 App for library manager.
 In this app I use SpringMVC, Spring Data, hibernate, Validation, TomCat.
-Use SQL commands for start from package 'init.SQL' in resourses directory
+Use SQL commands for start from package 'init.SQL' in resourses directory.
 enjoy=)
 
 TO DO:
