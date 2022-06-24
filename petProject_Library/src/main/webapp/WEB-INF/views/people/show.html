@@ -17,7 +17,7 @@
     <a
             th:href="@{/books/{id}(id=${book.getId()})}"
             th:style = "${book.isHoldPeriodEnded()} ? 'color: red' : 'color: blue ' "
-       th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear() + ' дата начала аренды ' + book.getHoldDate() }"
+            th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear() + ' дата начала аренды ' + book.getHoldDate() }"
     ></a>
     <p style="color: red" th:if="${book.isHoldPeriodEnded() == true}">
         <span> срок сдачи просрочен </span>

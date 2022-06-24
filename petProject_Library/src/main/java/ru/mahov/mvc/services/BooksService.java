@@ -8,12 +8,14 @@ import ru.mahov.mvc.models.Person;
 import ru.mahov.mvc.repositories.BooksRepository;
 import ru.mahov.mvc.repositories.PeopleRepository;
 
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
-public class BooksService {
+public class BooksService  {
 
     private final BooksRepository booksRepository;
     private final PeopleRepository peopleRepository;
@@ -33,7 +35,7 @@ public class BooksService {
     }
 
     public Optional<Person> findOwner(int id) {
-        return peopleRepository.findByBooks(booksRepository.findById(id).get());
+        return peopleRepository.findByBooks(booksRepository.findById(id).orElse(null));
     }
 
     @Transactional
@@ -54,23 +56,37 @@ public class BooksService {
 
     @Transactional
     public void hold(int bookId, int ownerId) {
-        Book holdBook = booksRepository.findById(bookId).get();
-        Person owner = peopleRepository.findById(ownerId).get();
-        holdBook.setOwner(owner);
-        owner.getBooks().add(holdBook);
-        peopleRepository.save(owner);
-        booksRepository.save(holdBook);
+        booksRepository.findById(bookId).flatMap(holdBook -> peopleRepository
+                .findById(ownerId)
+                .map(owner -> {
+                    holdBook.setOwner(owner);
+                    holdBook.setHoldDate(new Date());
+                    holdBook.setHoldPeriodEnded(false);
+                    owner.getBooks().add(holdBook);
+                    peopleRepository.save(owner);
+
+                    return Optional.empty();
+                }));
     }
 
     @Transactional
     public void release(int bookId) {
-        Book releaseBook = booksRepository.findById(bookId).get();
-        Person owner = peopleRepository.findByBooks(releaseBook).get();
-        releaseBook.setOwner(null);
-        owner.getBooks().remove(releaseBook);
-        peopleRepository.save(owner);
-        booksRepository.save(releaseBook);
-        System.out.println("test");
+        booksRepository
+                .findById(bookId)
+                .flatMap(releaseBook -> peopleRepository
+                        .findByBooks(releaseBook)
+                        .map(owner -> {
+                            releaseBook.setOwner(null);
+                            releaseBook.setHoldDate(null);
+                            owner.getBooks().remove(releaseBook);
+                            peopleRepository.save(owner);
+
+                            return Optional.empty();
+                        }));
+    }
+
+    public Optional<List<Book>> searchByTitle(String query) {
+        return booksRepository.findAllByTitleContains(query);
     }
 
 }
