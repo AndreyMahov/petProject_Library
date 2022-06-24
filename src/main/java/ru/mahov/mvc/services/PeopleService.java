@@ -20,7 +20,7 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 public class PeopleService {
-
+//TODO написать автоматическую погинация
     private final PeopleRepository peopleRepository;
     private final BooksRepository booksRepository;
 
