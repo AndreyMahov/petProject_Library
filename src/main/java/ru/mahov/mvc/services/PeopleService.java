@@ -23,8 +23,6 @@ public class PeopleService {
 
     private final PeopleRepository peopleRepository;
     private final BooksRepository booksRepository;
-//    private final int LIMIT_WITH_OUT_PAGINATION = 10;
-//    private final int COUNT_PAGES = (findAll().size() % LIMIT_WITH_OUT_PAGINATION) +1;
 
     @Autowired
     public PeopleService(PeopleRepository peopleRepository, BooksRepository booksRepository) {
@@ -45,9 +43,6 @@ public class PeopleService {
         } else if ((!page.isPresent() || !booksPerPage.isPresent()) && sortBy.isPresent()) {
             return peopleRepository.findAll(Sort.by(sortBy.get()));
         }
-//        else if (findAll().size() > LIMIT_WITH_OUT_PAGINATION){
-//            return peopleRepository.findAll(PageRequest.of(6, 2)).getContent();
-//        }
         else {
             return findAll();
         }
@@ -61,29 +56,7 @@ public class PeopleService {
     public Optional<List<Book>> showBooksInHold(int id) {
 
         // TODO написать в функциональном стиле
-//        peopleRepository.findById(id)
-//                .flatMap(booksRepository::findAllByOwner)
-//                .map(books -> books.stream().map(book -> {
-//                    LocalDate CalculateEndHoldDate = convertToLocalDateViaMilisecond(book.getHoldDate()).plusDays(10);
-//                   book.setHoldPeriodEnded(LocalDate.now().isAfter(CalculateEndHoldDate));
-//                    return books;
-//                }));
 
-
-//peopleRepository.findById(id).flatMap(booksRepository::findAllByOwner).map(books -> {
-//    for (Book book : books){
-//                   LocalDate CalculateEndHoldDate = convertToLocalDateViaMilisecond(book.getHoldDate()).plusDays(10);
-//
-//                    if (LocalDate.now().isAfter(CalculateEndHoldDate)){
-//                        book.setHoldPeriodEnded(true);
-//                    }
-//                    else {
-//                        book.setHoldPeriodEnded(false);
-//                    }
-//                }
-//                return books;
-//});
-//return Optional.empty();
 
         Optional<Person> owner = peopleRepository.findById(id);
         if (owner.isPresent()) {
