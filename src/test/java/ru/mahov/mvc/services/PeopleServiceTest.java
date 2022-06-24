@@ -51,6 +51,6 @@ public class PeopleServiceTest {
 
         //верифицируем, что наш мок был вызван столько раз и с таким аргументом как мы и ожидали
         //fixme
-        Mockito.verify(peopleRepoMock, Mockito.times(1)).findById(222);
+        Mockito.verify(peopleRepoMock, Mockito.times(1)).findById(111);
     }
 }
