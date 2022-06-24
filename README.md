@@ -1,7 +1,7 @@
-# first-springMVC-petProject_library
+# petProject_library
 App for library manager.
-In this app I use Spring framework, TomCat and JDBC template. 
-Use SQL commands for start from package 'SQL'
+In this app I use SpringMVC, Spring Data, hibernate, Validation, TomCat.
+Use SQL commands for start from package 'init.SQL' in resourses directory.
 enjoy=)
 
 TO DO:

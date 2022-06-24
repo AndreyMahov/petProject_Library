@@ -50,7 +50,9 @@ public class PeopleServiceTest {
         Assert.assertEquals(actual, Optional.of(vova));
 
         //верифицируем, что наш мок был вызван столько раз и с таким аргументом как мы и ожидали
+
         //fix
         Mockito.verify(peopleRepoMock, Mockito.times(1)).findById(111);
+
     }
 }
