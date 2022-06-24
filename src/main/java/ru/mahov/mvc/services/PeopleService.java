@@ -20,7 +20,7 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 public class PeopleService {
-//TODO написать автоматическую погинация
+    //TODO написать автоматическую пагинация
     private final PeopleRepository peopleRepository;
     private final BooksRepository booksRepository;
 
@@ -34,6 +34,7 @@ public class PeopleService {
         return peopleRepository.findAll();
     }
 
+    //TODO написать в вунциональном стиле
     public List<Person> findAll(Optional<Integer> page, Optional<Integer> booksPerPage, Optional<String> sortBy) {
 
         if (page.isPresent() && booksPerPage.isPresent() && sortBy.isPresent()) {
@@ -42,21 +43,17 @@ public class PeopleService {
             return peopleRepository.findAll(PageRequest.of(page.get(), booksPerPage.get())).getContent();
         } else if ((!page.isPresent() || !booksPerPage.isPresent()) && sortBy.isPresent()) {
             return peopleRepository.findAll(Sort.by(sortBy.get()));
-        }
-        else {
+        } else {
             return findAll();
         }
     }
-
 
     public Optional<Person> findOne(int id) {
         return peopleRepository.findById(id);
     }
 
+    // TODO написать в функциональном стиле
     public Optional<List<Book>> showBooksInHold(int id) {
-
-        // TODO написать в функциональном стиле
-
 
         Optional<Person> owner = peopleRepository.findById(id);
         if (owner.isPresent()) {
