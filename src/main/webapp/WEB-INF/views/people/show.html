@@ -13,8 +13,15 @@
 <br/>
 
 <div th:each="book:${books}" th:if="${!books.isEmpty()}">
-    <a th:href="@{/books/{id}(id=${book.getId()})}"
-       th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}"></a>
+
+    <a
+            th:href="@{/books/{id}(id=${book.getId()})}"
+            th:style = "${book.isHoldPeriodEnded()} ? 'color: red' : 'color: blue ' "
+            th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear() + ' дата начала аренды ' + book.getHoldDate() }"
+    ></a>
+    <p style="color: red" th:if="${book.isHoldPeriodEnded() == true}">
+        <span> срок сдачи просрочен </span>
+    </p>
 </div>
 <br/>
 <form  th:action="@{/people/{id}/edit(id=${person.getId()})}">

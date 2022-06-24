@@ -10,6 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface BooksRepository extends JpaRepository<Book, Integer> {
+
     Optional<List<Book>> findAllByOwner(Person owner);
+
+    Optional<List<Book>> findAllByTitleContains(String query);
 
 }

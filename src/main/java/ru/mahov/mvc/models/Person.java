@@ -1,6 +1,7 @@
 package ru.mahov.mvc.models;
 
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -10,7 +11,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "person")
-public @Data class Person {
+public @Data
+class Person {
+
+    @OneToMany(mappedBy = "owner")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    List<Book> books;
 
     @Id
     @Column(name = "id")
@@ -26,16 +32,12 @@ public @Data class Person {
     @Min(value = 1922, message = "поле не может быть меньше чем 1922")
     private int yearOfBirth;
 
-    @OneToMany(mappedBy = "owner")
-    List<Book> books;
-
     public Person() {
     }
 
     public Person(String fullName, int yearOfBirth) {
         this.fullName = fullName;
         this.yearOfBirth = yearOfBirth;
-
     }
 
     @Override
