@@ -34,7 +34,7 @@ public class PeopleService {
         return peopleRepository.findAll();
     }
 
-    //TODO написать в вунциональном стиле
+    //TODO написать в фунциональном стиле
     public List<Person> findAll(Optional<Integer> page, Optional<Integer> booksPerPage, Optional<String> sortBy) {
 
         if (page.isPresent() && booksPerPage.isPresent() && sortBy.isPresent()) {
