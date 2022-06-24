@@ -1,3 +1,4 @@
+@@ -1,36 +0,0 @@
 ##############################
 ## Java
 ##############################
@@ -34,5 +35,3 @@ out/
 *.ipr
 *.iws
 /src/main/resources/hibernate.properties
-/.github/
-/petProject_Library/
