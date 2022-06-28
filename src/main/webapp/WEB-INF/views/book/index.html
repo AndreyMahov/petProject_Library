@@ -19,5 +19,11 @@
     <input th:type="submit" value="к списку читателей"/>
 </form>
 
+<form th:method="POST"  th:action="@{/books/search}" >
+    <label for="query"> Поиск по названию </label>
+    <input id="query" type="text" name="query"/>
+    <input th:type="submit" value="Искать">
+</form>
+
 </body>
 </html>
