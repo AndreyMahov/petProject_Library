@@ -69,13 +69,13 @@ public class PeopleServiceTest {
         when(peopleRepoMock.findById(any())).thenReturn(Optional.of(testPerson));
 
         // вызываем тестируемый метод
-        Optional<Person> actual = service.findOne(PERSON_ID);
+        Optional<Person> actual = service.findOne(testPerson.getId());
 
         // делаем проверку, что actual == expected
         assertEquals(actual, Optional.of(testPerson));
 
         //верифицируем, что наш мок был вызван столько раз и с таким аргументом как мы и ожидали
-        verify(peopleRepoMock, times(1)).findById(111);
+        verify(peopleRepoMock, times(1)).findById(testPerson.getId());
 
     }
 
