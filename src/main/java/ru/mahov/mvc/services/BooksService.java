@@ -8,14 +8,13 @@ import ru.mahov.mvc.models.Person;
 import ru.mahov.mvc.repositories.BooksRepository;
 import ru.mahov.mvc.repositories.PeopleRepository;
 
-
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
-public class BooksService  {
+public class BooksService {
 
     private final BooksRepository booksRepository;
     private final PeopleRepository peopleRepository;
