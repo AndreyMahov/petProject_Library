@@ -9,7 +9,7 @@ TO DO:
 - Integration tests
 - Packaging in Docker container
 - CI pipeline with following steps: build -> fmt check -> unit tests -> integration tests -> publish docker image
-- Search users by name and books by title
+
 
 functional:
 
@@ -21,12 +21,14 @@ functional:
 
 4)A page with a complex book (books are clickable - when clicked, a transition to the page of the book occurred).
 
-5)A person's page showing their field values ​​and the list of books they have taken. If the person hasn't picked up any books, the list will instead read "no book".
+5) Search users by name and books by title
 
-6)A page of a book showing the values ​​of the margins of that book and the name of the person who borrowed that book. If this book has not been taken by anyone, the lyrics are "This book is free."
+6)A person's page showing their field values ​​and the list of books they have taken. If the person hasn't picked up any books, the list will instead read "no book".
 
-7)On the book page, if the book is taken from a person, there is a "Release Book" button next to their name. This button presses the library when the reader returns this book in exchange. After approaching this point, the book becomes free again and is sold from the person's book list.
+7)A page of a book showing the values ​​of the margins of that book and the name of the person who borrowed that book. If this book has not been taken by anyone, the lyrics are "This book is free."
 
-8)On the book page, if the book is free, there is a drop-down list with all people and a button "Assign book". This button presses the library when the reader wants to take this book home. Once the correct setting is selected, the guard book will be selected in its list of books.
+8)On the book page, if the book is taken from a person, there is a "Release Book" button next to their name. This button presses the library when the reader returns this book in exchange. After approaching this point, the book becomes free again and is sold from the person's book list.
 
-9)All fields are validated - with @Valid and Spring Validator if required.
+9)On the book page, if the book is free, there is a drop-down list with all people and a button "Assign book". This button presses the library when the reader wants to take this book home. Once the correct setting is selected, the guard book will be selected in its list of books.
+
+10)All fields are validated - with @Valid and Spring Validator if required.
