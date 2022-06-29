@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль читателя</title>
+</head>
+<body>
+
+<p th:text="${person.getFullName()} +', ' + ${person.getYear()}">VALUE</p>
+<br/>
+<p th:if="${books.isEmpty()}" th:text="'нет книг'"></p>
+<p th:if="${!books.isEmpty()}" th:text="'книги:'"></p>
+<br/>
+
+<div th:each="book:${books}" th:if="${!books.isEmpty()}">
+
+    <a
+            th:href="@{/books/{id}(id=${book.getId()})}"
+            th:style="${book.isHoldPeriodEnded()} ? 'color: red' : 'color: blue ' "
+            th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear() + ' дата начала аренды ' + book.getHoldDate() }"
+    ></a>
+    <p style="color: red" th:if="${book.isHoldPeriodEnded() == true}">
+        <span> срок сдачи просрочен </span>
+    </p>
+</div>
+<br/>
+<form th:action="@{/people/{id}/edit(id=${person.getId()})}">
+    <input th:type="submit" value="Редактировать">
+</form>
+
+<form th:action="@{/people/{id}(id=${person.getId()})}" th:method="DELETE">
+    <input th:type="submit" value="Удалить">
+
+</form>
+<form th:action="@{/people}">
+    <input th:type="submit" value="к списку читателей"/>
+</form>
+
+</body>
+</html>
