@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск читателя</title>
+</head>
+<body>
+
+</form>
+<form th:action="@{/people}">
+    <input th:type="submit" value="к списку читателей"/>
+</form>
+
+<form th:action="@{/people/search}" th:method="POST">
+    <label for="query"> Поиск по имени </label>
+    <input id="query" name="query" type="text"/>
+    <input th:type="submit" value="Искать">
+</form>
+
+<div th:if="${people.isEmpty()}">
+    <span style="color: red">Читателей не найдено </span>
+</div>
+
+<div th:each="person : ${people}">
+    <a th:href="@{/people/{id}(id=${person.getId()})}"
+       th:text="${person.getFullName()+ ', ' + person.getYear()}">user</a>
+</div>
+
+</body>
+</html>

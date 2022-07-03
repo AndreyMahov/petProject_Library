@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о книге</title>
+</head>
+<body>
+
+<p th:text="${book.getTitle()} + ', ' + ${book.getAuthor()} +', ' + ${book.getYear()}"> Value</p>
+<br/>
+
+<div>
+    <p sec:authorize="hasAuthority('ROLE_USER')" th:if="${owner != null}" th:text="'Книга у читателя'"></p>
+    <p sec:authorize="hasAuthority('ROLE_USER')" th:if="${people != null}" th:text="'Книга свободна'"></p>
+</div>
+
+<div sec:authorize="hasAuthority('ROLE_ADMIN')" th:if="${owner != null}">
+    <form th:action="@{/books/release-book/{id}(id=${book.getId()})}" th:method="PATCH" th:object="${book}">
+        <a th:href="@{/people/{id}(id=${owner.getId()})}"
+           th:text="'Книга у читателя ' + ${owner.getFullName()}"></a>
+
+        <input th:type="submit" value="освободить"/>
+    </form>
+</div>
+
+<div sec:authorize="hasAuthority('ROLE_ADMIN')" th:if="${people != null}">
+    <form th:action="@{/books/hold-book/{id}(id=${book.getId()})}" th:method="PATCH" th:object="${book}">
+
+        <p th:text="'Книга не занята'"></p>
+        <label for="person"></label>
+        <SELECT id="person" th:field="*{owner.id}" th:object="${book}">
+            <option th:each="person:${people}" th:text="${person.getFullName()}" th:value="${person.getId()}">
+            </option>
+            <input th:type="submit" value="Дать книгу"/>
+        </SELECT>
+
+    </form>
+</div>
+<br/>
+<hr/>
+
+<form sec:authorize="hasAuthority('ROLE_ADMIN')" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+    <input th:type="submit" value="Редактирвоать"/>
+</form>
+<br/>
+
+<form sec:authorize="hasAuthority('ROLE_ADMIN')"  th:action="@{/books/{id}(id=${book.getId()})}" th:method="DELETE">
+    <input th:type="submit" value="Удалить"/>
+</form>
+<br/>
+
+<form th:action="@{/books}">
+    <input th:type="submit" value="к списку книг"/>
+</form>
+
+</body>
+</html>
