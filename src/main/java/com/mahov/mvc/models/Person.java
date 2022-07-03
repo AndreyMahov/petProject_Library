@@ -1,8 +1,9 @@
-package com.petProject_library.models;
+package com.mahov.mvc.models;
 
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Cascade;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -13,9 +14,11 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "person")
-public @Getter
+@Component
+@Getter
 @Setter
-class Person {
+@ToString
+public class Person {
 
     @OneToMany(mappedBy = "owner")
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -36,21 +39,22 @@ class Person {
     @Min(value = 1922, message = "поле не может быть меньше чем 1922")
     private int year;
 
+    @Column(name = "login")
+    private String login;
+
+   //TODO make password in chars Array
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "role")
+    private String role;
+
     public Person() {
     }
 
     public Person(String fullName, int year) {
         this.fullName = fullName;
         this.year = year;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", yearOfBirth=" + year +
-                '}';
     }
 
     @Override
@@ -65,4 +69,5 @@ class Person {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }

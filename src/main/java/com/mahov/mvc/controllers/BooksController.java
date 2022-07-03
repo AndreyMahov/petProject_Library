@@ -1,9 +1,9 @@
-package com.petProject_library.controllers;
+package com.mahov.mvc.controllers;
 
-import com.petProject_library.models.Book;
-import com.petProject_library.models.Person;
-import com.petProject_library.services.BooksService;
-import com.petProject_library.services.PeopleService;
+import com.mahov.mvc.models.Book;
+import com.mahov.mvc.models.Person;
+import com.mahov.mvc.services.BooksService;
+import com.mahov.mvc.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

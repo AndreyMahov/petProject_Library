@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Список всех книг</title>
@@ -11,11 +11,11 @@
        th:text="${book.getTitle()+ ', ' + book.getAuthor() + ', ' + book.getYear()}">book</a>
 </div>
 <hr/>
-<form th:action="@{/books/new}">
+<form sec:authorize="hasAuthority('ROLE_ADMIN')" th:action="@{/books/new}">
     <input th:type="submit" value="Внести книгу"/>
 </form>
 <br/>
-<form th:action="@{/people}">
+<form sec:authorize="hasAuthority('ROLE_ADMIN')" th:action="@{/people}">
     <input th:type="submit" value="к списку читателей"/>
 </form>
 
@@ -23,6 +23,10 @@
     <label for="query"> Поиск по названию </label>
     <input id="query" name="query" type="text"/>
     <input th:type="submit" value="Искать">
+</form>
+
+<form th:action="@{/logout}" th:method="POST">
+    <input th:type="submit" value="Выйти из профиля"/>
 </form>
 
 </body>

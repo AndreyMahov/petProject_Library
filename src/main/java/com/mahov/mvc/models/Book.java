@@ -1,4 +1,4 @@
-package com.petProject_library.models;
+package com.mahov.mvc.models;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -11,9 +11,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "book")
-public @Getter
+@Getter
 @Setter
-class Book {
+@ToString
+public class Book {
 
     @Id
     @Column(name = "id")
@@ -52,34 +53,6 @@ class Book {
     }
 
     @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", year=" + year +
-                ", holdDate=" + holdDate +
-                ", holdPeriodEnded=" + holdPeriodEnded +
-                '}';
-    }
-
-    public boolean isHoldPeriodEnded() {
-        return holdPeriodEnded;
-    }
-
-    public void setHoldPeriodEnded(boolean holdPeriodEnded) {
-        this.holdPeriodEnded = holdPeriodEnded;
-    }
-
-    public Date getHoldDate() {
-        return holdDate;
-    }
-
-    public void setHoldDate(Date holdDate) {
-        this.holdDate = holdDate;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
@@ -91,4 +64,5 @@ class Book {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }

@@ -1,8 +1,8 @@
-package com.petProject_library.controllers;
+package com.mahov.mvc.controllers;
 
-import com.petProject_library.models.Person;
-import com.petProject_library.services.PeopleService;
-import com.petProject_library.util.PersonValidator;
+import com.mahov.mvc.models.Person;
+import com.mahov.mvc.services.PeopleService;
+import com.mahov.mvc.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

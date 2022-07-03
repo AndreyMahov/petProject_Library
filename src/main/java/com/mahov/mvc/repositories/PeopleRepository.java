@@ -1,7 +1,7 @@
-package com.petProject_library.repositories;
+package com.mahov.mvc.repositories;
 
-import com.petProject_library.models.Book;
-import com.petProject_library.models.Person;
+import com.mahov.mvc.models.Book;
+import com.mahov.mvc.models.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +17,7 @@ public interface PeopleRepository extends JpaRepository<Person, Integer> {
     Optional<Person> findByFullName(String fullname);
 
     Optional<List<Person>> findAllByFullNameContains(String query);
+
+    Optional<Person> findByLogin(String login);
 
 }

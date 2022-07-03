@@ -1,10 +1,11 @@
-package com.petProject_library.services;
+package com.mahov.mvc.services;
 
-import com.petProject_library.models.Book;
-import com.petProject_library.models.Person;
-import com.petProject_library.repositories.BooksRepository;
-import com.petProject_library.repositories.PeopleRepository;
+import com.mahov.mvc.models.Book;
+import com.mahov.mvc.models.Person;
+import com.mahov.mvc.repositories.BooksRepository;
+import com.mahov.mvc.repositories.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,7 @@ public class BooksService {
     }
 
     //TODO Test is no complete
+
     public Optional<Person> findOwner(int id) {
         return peopleRepository.findByBooks(booksRepository.findById(id).orElse(null));
     }
@@ -55,12 +57,14 @@ public class BooksService {
 
     //TODO Test is no complete
     @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void delete(int id) {
         booksRepository.deleteById(id);
     }
 
     //TODO Test is no complete
     @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void hold(int bookId, int ownerId) {
         booksRepository.findById(bookId).flatMap(holdBook -> peopleRepository
                 .findById(ownerId)
@@ -77,6 +81,7 @@ public class BooksService {
 
     //TODO Test is no complete
     @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void release(int bookId) {
         booksRepository
                 .findById(bookId)

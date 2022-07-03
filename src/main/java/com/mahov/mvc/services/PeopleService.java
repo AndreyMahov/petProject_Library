@@ -1,12 +1,14 @@
-package com.petProject_library.services;
+package com.mahov.mvc.services;
 
-import com.petProject_library.models.Book;
-import com.petProject_library.models.Person;
-import com.petProject_library.repositories.BooksRepository;
-import com.petProject_library.repositories.PeopleRepository;
+import com.mahov.mvc.models.Person;
+import com.mahov.mvc.repositories.PeopleRepository;
+import com.mahov.mvc.models.Book;
+import com.mahov.mvc.repositories.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,16 +24,14 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class PeopleService {
 
-    private PeopleRepository peopleRepository;
-    private BooksRepository booksRepository;
-
+    private final PeopleRepository peopleRepository;
+    private final BooksRepository booksRepository;
+    private final PasswordEncoder passwordEncoder;
     @Autowired
-    public PeopleService(PeopleRepository peopleRepository, BooksRepository booksRepository) {
+    public PeopleService(PeopleRepository peopleRepository, BooksRepository booksRepository, PasswordEncoder passwordEncoder) {
         this.peopleRepository = peopleRepository;
         this.booksRepository = booksRepository;
-    }
-
-    public PeopleService() {
+        this.passwordEncoder = passwordEncoder;
     }
 
     //Test is complete
@@ -55,6 +55,7 @@ public class PeopleService {
     }
 
     // TODO write in functional style. Test is no complete
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Optional<List<Book>> showBooksInHold(int id) {
 
         Optional<Person> owner = peopleRepository.findById(id);
@@ -84,9 +85,17 @@ public class PeopleService {
         return peopleRepository.findByFullName(name);
     }
 
+
+    //TODO Test is no complete
+    public Optional<Person> findByLogin(String login) {
+        return peopleRepository.findByLogin(login);
+    }
+
     //Test is complete
     @Transactional
     public void create(Person person) {
+        person.setPassword(passwordEncoder.encode(person.getPassword()));
+        person.setRole("ROLE_USER");
         peopleRepository.save(person);
     }
 
@@ -99,13 +108,18 @@ public class PeopleService {
 
     //TODO Test is no complete
     @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void delete(int id) {
         peopleRepository.deleteById(id);
     }
 
     //TODO Test is no complete
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Optional<List<Person>> findAllByFullname(String query) {
         return peopleRepository.findAllByFullNameContains(query);
     }
+
+
 
 }

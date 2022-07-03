@@ -1,10 +1,10 @@
-package com.petProject_library.serviceTest;
+package com.mahov.mvc.serviceTest;
 
-import com.petProject_library.models.Book;
-import com.petProject_library.models.Person;
-import com.petProject_library.repositories.BooksRepository;
-import com.petProject_library.repositories.PeopleRepository;
-import com.petProject_library.services.PeopleService;
+import com.mahov.mvc.models.Person;
+import com.mahov.mvc.repositories.PeopleRepository;
+import com.mahov.mvc.models.Book;
+import com.mahov.mvc.repositories.BooksRepository;
+import com.mahov.mvc.services.PeopleService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

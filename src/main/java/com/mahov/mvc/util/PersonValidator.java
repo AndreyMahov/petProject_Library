@@ -1,7 +1,7 @@
-package com.petProject_library.util;
+package com.mahov.mvc.util;
 
-import com.petProject_library.models.Person;
-import com.petProject_library.services.PeopleService;
+import com.mahov.mvc.models.Person;
+import com.mahov.mvc.services.PeopleService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -26,10 +26,14 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Person updatePerson = (Person) o;
-        Optional<Person> dbPerson = peopleService.findByFullname(updatePerson.getFullName());
+        Optional<Person> checkNamePerson = peopleService.findByFullname(updatePerson.getFullName());
+        Optional<Person> checkLoginPerson = peopleService.findByLogin(updatePerson.getLogin());
 
-        if (dbPerson.isPresent() && updatePerson.getId() != dbPerson.get().getId()) {
+        if (checkNamePerson.isPresent() && updatePerson.getId() != checkNamePerson.get().getId()) {
             errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");
+        }
+        if (checkLoginPerson.isPresent() && updatePerson.getId() != checkLoginPerson.get().getId()) {
+            errors.rejectValue("login", "", "Человек с таким логином уже существует");
         }
         if (updatePerson.getYear() > (Year.now().getValue() - MIN_YEAR)) {
             errors.rejectValue("year", "", "Регистрация только с 14 лет");
